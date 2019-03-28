@@ -17,13 +17,13 @@ public class DetectLabels {
         RekognitionApiClient client = new RekognitionApiClient();
 
         Image img = getS3Image("nn-images", "barnett.png");
-        client.getLabels(img)
+        client.detectLabels(img)
                 .forEach(l -> System.out.println("label:"+l.name()+", confidence:"+l.confidence()));
 
         Image img2 = getImageFromURL(
                 "http://i.ebayimg.com/images/i/161381748444-0-1/s-l1000.jpg");
                 //https://brain-images-ssl.cdn.dixons.com/2/6/10071762/u_10071762.jpg");
-        client.getText(img2)
+        client.detectText(img2)
                 .forEach(t -> System.out.println("text=" + t.detectedText() + ", confidence=" + t.confidence()));
     }
 
