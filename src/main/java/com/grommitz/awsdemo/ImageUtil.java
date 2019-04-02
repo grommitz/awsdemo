@@ -6,6 +6,7 @@ import software.amazon.awssdk.services.rekognition.model.S3Object;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +38,10 @@ public class ImageUtil {
         return Image.builder()
                 .s3Object(S3Object.builder().bucket(bucket).name(name).build())
                 .build();
+    }
+
+    public static BufferedImage toBufferedImage(Image img) throws IOException {
+        return ImageIO.read(new ByteArrayInputStream(img.bytes().asByteArray()));
     }
 
 }

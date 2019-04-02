@@ -38,7 +38,7 @@ public class CreditCardNumberFinder {
             return;
         }
 
-        BufferedImage bi = ImageIO.read(new ByteArrayInputStream(img2.bytes().asByteArray()));
+        BufferedImage bi = ImageUtil.toBufferedImage(img2);
 
         // next - draw bounding box & display it
         for (TextDetection ccNum : ccs) {
