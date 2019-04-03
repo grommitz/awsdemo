@@ -6,6 +6,9 @@ import software.amazon.awssdk.services.rekognition.model.*;
 
 import java.util.List;
 
+/**
+ * Simple wrapper round the Rekognition api
+ */
 public class RekognitionApiClient {
 
     private RekognitionClient rekognition;

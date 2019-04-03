@@ -10,12 +10,14 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
 public class ImageUtil {
 
+    /**
+     * Download from web into an {@link Image}
+     */
     public static Image getImageFromURL(String url_) throws IOException {
         URL url = new URL(url_);
         ByteArrayOutputStream output = new ByteArrayOutputStream();
@@ -34,14 +36,32 @@ public class ImageUtil {
                 .build();
     }
 
+    /**
+     * Fetch an image from S3
+     */
     public static Image getS3Image(String bucket, String name) {
         return Image.builder()
                 .s3Object(S3Object.builder().bucket(bucket).name(name).build())
                 .build();
     }
 
+    /**
+     * convert an {@link Image} to a {@link BufferedImage}
+     */
     public static BufferedImage toBufferedImage(Image img) throws IOException {
         return ImageIO.read(new ByteArrayInputStream(img.bytes().asByteArray()));
     }
+
+    /**
+     * download from the web directly to a {@link BufferedImage}
+     */
+    private static BufferedImage getBufferedImageFromURL(String url) {
+        try {
+            return ImageIO.read(new URL(url));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
